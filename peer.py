@@ -6,10 +6,11 @@ from message import create_message, parse_message
 from user_presence import UserPresence
 
 class Peer:
-    def __init__(self, host, port, username):
+    def __init__(self, host, port, username, update_chat_callback=None):
         self.host = host
         self.port = port
         self.username = username
+        self.update_chat_callback = update_chat_callback
         self.user_presence = UserPresence()  # Manage presence info
         self.peers = {}  # Could store known peers, e.g., {username: (ip, port)}
         
@@ -45,9 +46,11 @@ class Peer:
                 sender = data.get('sender')
                 content = data.get('content')
                 timestamp = data.get('timestamp')
-                print(f"[{self.username}] Received from {sender} at {time.ctime(timestamp)}: {content}")
+                formatted_message = f"[{self.username}] Received from {sender} at {time.ctime(timestamp)}: {content}"
+                print(formatted_message)
                 
-                # Optionally, send back an acknowledgment
+                if self.update_chat_callback:
+                    self.update_chat_callback(formatted_message)
                 ack = create_message(self.username, "Ack: Message received")
                 client_socket.send(ack.encode())
             except Exception as e:
@@ -66,6 +69,12 @@ class Peer:
                 # Optionally wait for an acknowledgment
                 ack = client_socket.recv(1024).decode()
                 if ack:
-                    print(f"[{self.username}] Received ack: {parse_message(ack)['content']}")
+                    ack_message = f"[{self.username}] Received ack: {parse_message(ack)['content']}"
+                    print(ack_message)
+                    if self.update_chat_callback:
+                        self.update_chat_callback(ack_message)
         except Exception as e:
-            print(f"[{self.username}] Error sending message: {e}")
+            error_msg = f"[{self.username}] Error sending message: {e}"
+            print(error_msg)
+            if self.update_chat_callback:
+                self.update_chat_callback(error_msg)
