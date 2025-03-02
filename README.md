@@ -75,7 +75,7 @@ No additional external packages are required.
 
 ### Running Multiple Instances
 For testing on the same machine:
-- Use your LAN IP (e.g., `127.0.0.1`) for "Your IP."
+- Use your IP (e.g., `127.0.0.1`) for "Your IP."
 - Ensure each instance uses a unique local port (e.g., one instance on `5555` and another on `5556`).
 - Manually input the target peer’s IP and port for establishing connections.
 
