@@ -26,6 +26,7 @@ The P2P Chat Application includes:
 ## Project Structure
 ```bash
 P2P-Chat-Application/
+├── main.py                      # Main script for CLI-based input (if used)
 ├── peer.py                      # Core Peer class for managing TCP connections and message routing
 ├── message.py                   # Helper functions for creating and parsing JSON messages
 ├── user_presence.py             # Manages user presence (online/offline) and generates corresponding JSON messages
@@ -48,7 +49,7 @@ No additional external packages are required.
 ### Running the GUI Version (Manual Connection)
 
 1. **Launch the GUI:**
-   - Open your terminal(main) or command prompt(gui).
+   - Open your terminal or command prompt.
    - Navigate to your project directory.
    - Run the command:
      ```bash
@@ -58,6 +59,7 @@ No additional external packages are required.
      ```bash
      py gui.py
      ```
+    *Note: Run **py main.py** if you want to use the terminal to input your IP and host address, or **py gui.py** if you want to utilize the GUI for interaction.*
 
 2. **Enter Your Connection Details:**
    - **Your IP:** Enter your IP address (e.g., `127.0.0.1`).
