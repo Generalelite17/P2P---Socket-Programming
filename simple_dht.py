@@ -17,7 +17,7 @@ class SimpleDHT:
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         # Allow multiple apps to use the same port (for multicast/broadcast)
         self.sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-        self.sock.bind((self.local_host, self.local_port))
+        self.sock.bind(("0.0.0.0", self.local_port))
         threading.Thread(target=self.listen_for_broadcasts, daemon=True).start()
     
     def broadcast_presence(self):
@@ -64,7 +64,7 @@ class SimpleDHT:
 
 # Example usage:
 if __name__ == "__main__":
-    dht = SimpleDHT("192.168.0.255", 6000, "Emmanuel", broadcast_port=50000)
+    dht = SimpleDHT("192.168.0.115", 6000, "Emmanuel", broadcast_port=50000)
     dht.start_broadcasting()
     while True:
         print("Current peers:", dht.get_peer_list())
