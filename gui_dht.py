@@ -85,7 +85,7 @@ class ChatGUI:
 
         try:
             port = int(port_str)
-            #broadcast_port = int(broadcast_port_str)
+            broadcast_port = int(broadcast_port_str)
         except ValueError:
             messagebox.showerror("Error", "Port and broadcast port must be numbers.")
             return
@@ -99,7 +99,7 @@ class ChatGUI:
 
         # Start the discovery module using the provided broadcast port
         try:
-            #self.dht.local_port = broadcast_port  # Update DHT to use the user-specified broadcast port
+            self.dht.local_port = broadcast_port  # Update DHT to use the user-specified broadcast port
             self.dht.start_broadcasting()
         except Exception as e:
             messagebox.showerror("DHT Error", str(e))
@@ -150,13 +150,23 @@ class ChatGUI:
         else:
             messagebox.showerror("Error", "You are not connected.")
 
+    def on_close(self):
+        """Clean up resources when the window is closed."""
+        if self.sock:
+            try:
+                self.sock.close()
+            except Exception:
+                pass
+        self.master.destroy() 
+
 if __name__ == "__main__":
     import tkinter as tk
     root = tk.Tk()
-    # Import your discovery module (e.g., SimpleDHT)
-    from simple_dht import SimpleDHT  # Ensure your discovery code is in simple_dht.py
-    # Create an instance of the DHT for discovery
-    # Note: We pass a default port here; it will be updated by the user's input in connect().
+    """
+    Worked in progess - uncomment out these lines of codes to start testing out DHT method. 
     dht = SimpleDHT("127.0.0.1", 6000, "Emmanuel")
     app = ChatGUI(root, dht)
+    """
+    app = ChatGUI(root)
+    root.protocol("WM_DELETE_WINDOW", app.on_close)
     root.mainloop()
