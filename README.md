@@ -22,7 +22,9 @@ The P2P Chat Application includes:
 - **Concurrency:**  
   The application uses multithreading to handle incoming connections and real-time message updates.
 
+
 ## Project Structure
+```bash
 P2P-Chat-Application/
 ├── peer.py                      # Core Peer class for managing TCP connections and message routing
 ├── message.py                   # Helper functions for creating and parsing JSON messages
@@ -32,7 +34,7 @@ P2P-Chat-Application/
 ├── README.md                    # Project overview and documentation
 ├── requirements.txt             # List of dependencies (uses Python standard libraries)
 └── LICENSE                      # License file (e.g., MIT License)
-
+```
 
 ## Requirements
 
@@ -58,7 +60,7 @@ No additional external packages are required.
      ```
 
 2. **Enter Your Connection Details:**
-   - **Your IP:** Enter your LAN IP address (e.g., `192.168.0.115`).
+   - **Your IP:** Enter your IP address (e.g., `127.0.0.1`).
    - **Your Port:** Enter a unique port number for your instance (e.g., `5555`).
    - **Username:** Enter your desired username.
    - Click the **Connect** button.
@@ -72,9 +74,8 @@ No additional external packages are required.
    - Sent messages and any responses will appear in the chat display area.
 
 ### Running Multiple Instances
-
 For testing on the same machine:
-- Use your LAN IP (e.g., `192.168.0.115`) for "Your IP."
+- Use your LAN IP (e.g., `127.0.0.1`) for "Your IP."
 - Ensure each instance uses a unique local port (e.g., one instance on `5555` and another on `5556`).
 - Manually input the target peer’s IP and port for establishing connections.
 
