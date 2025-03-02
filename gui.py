@@ -44,7 +44,7 @@ class ChatGUI:
         self.target_ip_entry = tk.Entry(target_frame, width=15)
         self.target_ip_entry.pack(side="left", padx=5)
         tk.Label(target_frame, text="Target Port:").pack(side="left", padx=5)
-        self.target_port_entry = tk.Entry(target_frame, width=6)
+        self.target_port_entry = tk.Entry(target_frame, width=15)
         self.target_port_entry.pack(side="left", padx=5)
 
         # Chat Display Area
